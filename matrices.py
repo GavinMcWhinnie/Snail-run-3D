@@ -22,6 +22,12 @@ class Vector():
     def set(self, row, value):
         self.data[row] = value
         setattr(self, ("v" + str(row)), value)
+
+    def magnitude(self):
+        count = 0
+        for item in data:
+            count += item**2
+        return math.sqrt(count)
         
 class Matrix():
 
@@ -71,8 +77,15 @@ class Matrix():
     def set(self, row, column, value):
         self.data[row][column] = value
         setattr(self, ("m" + str(row) + str(column)), value)
+
+class plane():
+
+    def __init__(self, data):
+        self.data = data
+        self.a, self.b, self.c, self.d = self.data
+        
     
-def add(matrix1, matrix2):
+def matrix_addition(matrix1, matrix2):
     if (matrix1.width != matrix2.width) or (matrix1.height != matrix2.height):
         return(-1)
     else:
@@ -84,7 +97,7 @@ def add(matrix1, matrix2):
                 total.set(row, column, matrix1.get(row, column) + matrix2.get(row, column))
         return total
 
-def product(matrix1, matrix2):
+def matrix_product(matrix1, matrix2):
     if  matrix1.width == matrix2.height:
         product = Matrix(matrix1.height, matrix2.width)
         for row in range(0, product.height):
