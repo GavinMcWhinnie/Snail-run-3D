@@ -1,3 +1,4 @@
+import pygame
 import numpy as np
 
 def create_x_rotation(rotX):
@@ -27,11 +28,40 @@ def rotate_vector(vector, rotX, rotY, rotZ):
     z_rotate = y_rotate.dot(create_z_rotation(rotZ))
     return z_rotate
 
-class canvas():
+#########################################################
 
-    def __init__(self, width, height):
+class Cube():
 
-        self.width = width
-        self.height = height
+    def __init__(self, size, origin, rotX, rotY, rotZ):
+        self.origin = np.array(origin)
+        self.size = size
+        self.rotX = rotX
+        self.rotY = rotY
+        self.rotZ = rotZ
+        self.update_sides()
 
+    def update_points(self):
+        self.points = []
+        for point in range(0, 8):
+            new_vector = np.array([int(x) - 0.5 for x in format(point, "b").zfill(3)])
+            scaled = new_vector * self.size * 2
+            rotated = rotate_vector(scaled, self.rotX, self.rotY, self.rotZ)
+            shifted = rotated + self.origin
+            self.points.append(shifted)
+
+    def update_sides(self):
+        self.sides = []
+        self.update_points()
+        magic_numbers = [0, 3, 5, 6]
+        for magic_number in magic_numbers:
+            for x in range(0, 3):
+                self.sides.append([self.points[magic_number],self.points[magic_number ^ (2 ** x)]])
+
+    def rotate(self, x,y,z):
+        self.rotX = (self.rotX + x) % 360
+        self.rotY = (self.rotY + y) % 360
+        self.rotZ = (self.rotZ + z) % 360
+
+if __name__ == "__main__":
+    example = Cube(10,[0,0,0], 0, 0, 0)
 
