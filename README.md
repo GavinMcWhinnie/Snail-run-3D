@@ -9,5 +9,3 @@ Class Objects:
 - Vector
 - Plane
 - Point
-
-Gavin is too embarrassed to use numpy
