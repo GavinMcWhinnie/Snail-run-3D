@@ -60,8 +60,7 @@ def translate(_3D_point, screen_position, screen_direction, viewer_distance):
     t = -((screen_direction.dot(_3D_point) + d) / screen_direction.dot(point_to_viewer))
 
     intersection = _3D_point + (point_to_viewer * t)
-
-
+    
     ###### step 5 ######
 
     ratio_for_x_axis = 1 / np.sqrt(a**2 + b**2 + c**2)
@@ -87,10 +86,10 @@ def translate(_3D_point, screen_position, screen_direction, viewer_distance):
 
     vector_on_plane = intersection - screen_position
 
+
     #vector_on_plane = [l, m, n]
     #x_axis = [a, b, 0]
     #y_axis = [d, e, f]
-    #camera_position = [p, q, r]
 
     #[l]   [xa]   [yd]
     #[m] = [xb] + [ye]
@@ -98,9 +97,14 @@ def translate(_3D_point, screen_position, screen_direction, viewer_distance):
 
     y = vector_on_plane[2] / y_axis[2]
 
+    #l = xa + yd
+    #l - yd = xa
+    #x = (l - yd)/a
+
+    
     x = (vector_on_plane[0] - y * y_axis[0]) / x_axis[0]
 
-    _2D_vector = np.array([x, y])
+    _2D_vector = np.array([round(x,2), round(y,2)])
 
     return _2D_vector
 
