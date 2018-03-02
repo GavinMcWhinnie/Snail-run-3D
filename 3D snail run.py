@@ -62,6 +62,8 @@ class Cube():
         self.rotY = (self.rotY + y) % 360
         self.rotZ = (self.rotZ + z) % 360
 
+#########################################################
+
 if __name__ == "__main__":
     example = Cube(10,[0,0,0], 0, 0, 0)
 
