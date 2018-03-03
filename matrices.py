@@ -1,3 +1,5 @@
+import numpy
+
 class Vector():
 
     def __init__(self, height, data=None):
@@ -137,3 +139,9 @@ def dot_product(x,y):
         return total
     else:
         return -1
+
+data = [None]*20
+for x in range(20):
+    data[x] = numpy.arange(x*20,x*20+20)
+
+bob = Matrix(5,5,data)
