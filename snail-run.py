@@ -15,7 +15,12 @@ PI = 3.141592653
 size = (400, 500)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("Iain")
+pygame.display.set_caption("Snail Run 3D")
+
+#load logo
+logo = pygame.image.load('logo.png')
+screen.blit(logo, (0,0))
+pygame.display.flip()
 
 # Loop until the user clicks the close button.
 done = False

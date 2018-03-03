@@ -1,5 +1,5 @@
 # Snail-run-3D
-A snail was set free, his world was 3D, he was a escapee and he jumps with the space key
+A snail was set free, his world was 3D, he was an escapee and he jumps with the space key
 
 #Plan
 Rendering engine
@@ -9,3 +9,5 @@ Class Objects:
 - Vector
 - Plane
 - Point
+
+Gavin is too embarrassed to use numpy
