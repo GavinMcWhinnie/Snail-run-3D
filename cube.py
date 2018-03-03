@@ -65,6 +65,10 @@ class Cube():
         self.update_sides()
         return self.sides
 
+    def draw(self, pygame, screen):
+        self.update_sides()
+        for side in self.sides
+
 class Cuboid():
 
     def __init__(self, width, height, breadth, origin, rotation=None):
