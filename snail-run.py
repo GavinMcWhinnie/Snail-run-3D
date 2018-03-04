@@ -19,8 +19,9 @@ pygame.display.set_caption("Snail Run 3D")
 
 #load logo
 logo = pygame.image.load('logo.png')
-screen.blit(logo, (0,0))
+screen.blit(logo, (-120,-120))
 pygame.display.flip()
+screen.fill((255,255,255))
 
 # Loop until the user clicks the close button.
 done = False

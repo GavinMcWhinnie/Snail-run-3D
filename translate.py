@@ -110,7 +110,7 @@ def translate(_3D_point, screen_position, screen_direction, viewer_distance):
 
 if __name__ == "__main__":
     screen_position = np.array([100,100,100])
-    screen_direction = np.array([-1,-1,-1])
+    screen_direction = np.array([1,1,1])
     viewer_distance = 50
     _3D_point = np.array([0,0,100])
 
