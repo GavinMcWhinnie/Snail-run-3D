@@ -15,6 +15,9 @@ def translate(_3D_point, screen_position, screen_direction, viewer_distance):
 
     ## screen rotation is not yet available
     ## prints error if point not visible - what else should happen instead?
+    for x in range(len(screen_position)):
+        if screen_position[x] == 0:
+            screen_postiion[x] += 0.001
     
     ###### step 1 ######
     #work out where viewer is
