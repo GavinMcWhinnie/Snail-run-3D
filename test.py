@@ -14,9 +14,9 @@ screen = pygame.display.set_mode(size)
 screen.fill(WHITE)
 pygame.display.set_caption("Snail Run 3D")
 
-bob = characters.Snail([0,0,0], [0,45,0])
+bob = characters.Snail([0,0,0])
 def draw_bob(woah):
-    for cube in bob.return_sides():
+    for cube,color in bob.return_sides():
         for side in cube:
 
             screen_position = np.array([1000,1000,woah + 0.01])
@@ -26,7 +26,25 @@ def draw_bob(woah):
             start = translate.translate(side[0], screen_position, screen_direction, viewer_distance)
             end = translate.translate(side[1], screen_position, screen_direction, viewer_distance)
             pygame.draw.line(screen, BLACK, (start[0]+200,-start[1]+250), (end[0]+200, -end[1]+250), 1)
+
+def draw_bob_magic(woah):
+
+    screen_position = np.array([1000,1000,woah + 0.01])
+    screen_direction = np.array([-1,-1,-woah/1000 + 0.01])
+    viewer_distance = 1000
     
+    for cube, color in bob.return_faces(screen_position):
+        for face in cube:
+
+            points = []
+
+            for point in face:
+                point = translate.translate(point, screen_position, screen_direction, viewer_distance)
+                point[0] += 200
+                point[1] = -point[1] + 250
+                points.append(point)
+            
+            pygame.draw.polygon(screen, color, points, 0)
 
 def draw_axis(height):
     screen_position = np.array([1000,1000,height +0.01])
@@ -69,13 +87,14 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill(WHITE)
+    screen.fill((230,255,255))
     if moving_up:
         height += 50
     elif moving_down:
         height -= 50
     
     draw_axis(height)
+    draw_bob_magic(height)
     draw_bob(height)
     pygame.display.flip()
 

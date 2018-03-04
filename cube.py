@@ -32,9 +32,10 @@ def rotate_vector(vector, rotation):
 
 class Cube():
 
-    def __init__(self, size, origin, rotation=None):
+    def __init__(self, size, origin, color, rotation=None):
         self.origin = np.array(origin)
         self.size = size
+        self.color = color
         if type(rotation) == type(None):
             rotation = [0, 0, 0]
         self.rotation = np.array(rotation)
@@ -71,10 +72,25 @@ class Cube():
                     self.faces.append([self.points[x] for x in [magic, magic ^ 1, remaining_magic, remaining_magic ^ 1]])
     
     def return_sides(self):
-        return self.sides
+        return self.sides, self.color
 
-    def return_faces(self):
-        return self.faces
+    def return_faces(self, screen_position):
+        highest_magnitude = 0
+        furthest_point = 0
+        for point in self.points:
+            point_to_screen = screen_position - point
+            magnitude = np.sqrt(point_to_screen.dot(point_to_screen))
+            if magnitude > highest_magnitude:
+                highest_magnitude = magnitude
+                furthest_point = point
+        visible_faces = []
+        for face in self.faces:
+            try:
+                face.index(furthest_point)
+            except ValueError:
+                visible_faces.append(face)
+
+        return visible_faces, self.color
 
     def rotate(self, rotation):
         self.rotation[0] = (self.rotation[0] + rotation[0]) % 360
@@ -83,11 +99,12 @@ class Cube():
 
 class Cuboid():
 
-    def __init__(self, width, height, breadth, origin, rotation=None):
+    def __init__(self, width, height, breadth, origin, color, rotation=None):
         self.origin = np.array(origin)
         self.width = width
         self.height = height
         self.breadth = breadth
+        self.color = color
         if type(rotation)== type(None):
             rotation = [0, 0, 0]
         self.rotation = np.array(rotation)
@@ -124,10 +141,25 @@ class Cuboid():
                     self.faces.append([self.points[x] for x in [magic, magic ^ 1, remaining_magic, remaining_magic ^ 1]])
 
     def return_sides(self):
-        return self.sides
+        return self.sides, self.color
 
-    def return_faces(self):
-        return self.faces
+    def return_faces(self, screen_position):
+        highest_magnitude = 0
+        furthest_point = 0
+        for point in self.points:
+            point_to_screen = screen_position - point
+            magnitude = np.sqrt(point_to_screen.dot(point_to_screen))
+            if magnitude > highest_magnitude:
+                highest_magnitude = magnitude
+                furthest_point = point
+        visible_faces = []
+        for face in self.faces:
+            try:
+                face.index(furthest_point)
+            except ValueError:
+                visible_faces.append(face)
+
+        return visible_faces, self.color
 
     def rotate(self, rotation):
         self.rotation[0] = (self.rotation[0] + rotation[0]) % 360
