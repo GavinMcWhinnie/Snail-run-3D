@@ -33,8 +33,8 @@ class Snail():
         eye_2 = cube.Cube(20, self.origin + eye_2_position, self.rotation)
         self.cubes.append(eye_2)
 
-        shell_position = cube.rotate_vector(np.array([0, 140, 40]), self.rotation)
-        shell = cube.Cuboid(120, 200, 160, self.origin + shell_position, self.rotation)
+        shell_position = cube.rotate_vector(np.array([0, 140, 60]), self.rotation)
+        shell = cube.Cuboid(120, 200, 200, self.origin + shell_position, self.rotation)
         self.cubes.append(shell)
 
     def return_sides(self):
