@@ -49,8 +49,12 @@ height = 1000
 moving_up = False
 moving_down = False
 
+clock = pygame.time.Clock()
+
 running = True
 while running:
+
+    clock.tick(10)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
@@ -67,9 +71,9 @@ while running:
 
     screen.fill(WHITE)
     if moving_up:
-        height += 25
+        height += 50
     elif moving_down:
-        height -= 25
+        height -= 50
     
     draw_axis(height)
     draw_bob(height)

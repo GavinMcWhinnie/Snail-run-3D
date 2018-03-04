@@ -27,6 +27,11 @@ def rotate_vector(vector, rotation):
     z_rotate = y_rotate.dot(create_z_rotation(rotation[2]))
     return z_rotate
 
+def draw_line(pygame, screen, vectors, color):
+    start = vectors[1]
+    end = vectors[2]
+    pygame.draw.line(screen, color, (start[0],start[1]), (end[0],end[1]), 1)
+
 #########################################################
 
 class Cube():
