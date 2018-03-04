@@ -67,7 +67,8 @@ class Cube():
 
     def draw(self, pygame, screen):
         self.update_sides()
-        for side in self.sides
+        for side in self.sides:
+            pass
 
 class Cuboid():
 
