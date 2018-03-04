@@ -51,8 +51,11 @@ clock = pygame.time.Clock()
 
 logo = pygame.image.load('logo.png')
 bob = characters.Snail([0,0,-400])
-font = pygame.font.SysFont('Calibri', 25, True, False)
-text = font.render("Press Space to Play", True, BLACK)
+big_font = pygame.font.SysFont('Calibri', 25, True, False)
+small_font = pygame.font.SysFont('Calibri', 15, True, False)
+start_message = big_font.render("Press Space to Play", True, BLACK)
+glitch_message = small_font.render("(Warning: it's glitchy)", True, BLACK)
+
 
 ### set screen/camera position for translate
 
@@ -89,7 +92,8 @@ while running:
 
     if game_stage == "Title":
         screen.blit(logo, (90,70))
-        screen.blit(text, (150, 450))
+        screen.blit(start_message, (150, 450))
+        screen.blit(glitch_message, (300, 250))
         bob.rotate([0,0,5])
         draw_character(bob, False)
         
