@@ -27,10 +27,6 @@ def rotate_vector(vector, rotation):
     z_rotate = y_rotate.dot(create_z_rotation(rotation[2]))
     return z_rotate
 
-def draw_line(pygame, screen, vectors, color):
-    start = vectors[1]
-    end = vectors[2]
-    pygame.draw.line(screen, color, (start[0],start[1]), (end[0],end[1]), 1)
 
 #########################################################
 
@@ -42,7 +38,9 @@ class Cube():
         if type(rotation) == type(None):
             rotation = [0, 0, 0]
         self.rotation = np.array(rotation)
+        self.magic_numbers = [0, 3, 5, 6]
         self.update_sides()
+        self.update_faces()
 
     def update_points(self):
         self.points = []
@@ -56,24 +54,32 @@ class Cube():
     def update_sides(self):
         self.sides = []
         self.update_points()
-        magic_numbers = [0, 3, 5, 6]
-        for magic_number in magic_numbers:
+        for magic_number in self.magic_numbers:
             for x in range(0, 3):
                 self.sides.append([self.points[magic_number],self.points[magic_number ^ (2 ** x)]])
+
+    def update_faces(self):
+        self.faces = []
+        magics = self.magic_numbers
+        for x in range(len(magics)):
+            magic = magics[0]
+            del magics[0]
+            for remaining_magic in magics:
+                if remaining_magic ^ magic == 6:
+                    self.faces.append([self.points[x] for x in [magic, magic ^ 2, remaining_magic, remaining_magic ^ 2]])
+                else:
+                    self.faces.append([self.points[x] for x in [magic, magic ^ 1, remaining_magic, remaining_magic ^ 1]])
+    
+    def return_sides(self):
+        return self.sides
+
+    def return_faces(self):
+        return self.faces
 
     def rotate(self, rotation):
         self.rotation[0] = (self.rotation[0] + rotation[0]) % 360
         self.rotation[1] = (self.rotation[1] + rotation[1]) % 360
         self.rotation[2] = (self.rotation[2] + rotation[2]) % 360
-
-    def return_sides(self):
-        self.update_sides()
-        return self.sides
-
-    def draw(self, pygame, screen):
-        self.update_sides()
-        for side in self.sides:
-            pass
 
 class Cuboid():
 
@@ -85,7 +91,9 @@ class Cuboid():
         if type(rotation)== type(None):
             rotation = [0, 0, 0]
         self.rotation = np.array(rotation)
+        self.magic_numbers = [0, 3, 5, 6]
         self.update_sides()
+        self.update_faces()
 
     def update_points(self):
         self.points = []
@@ -99,19 +107,32 @@ class Cuboid():
     def update_sides(self):
         self.sides = []
         self.update_points()
-        magic_numbers = [0, 3, 5, 6]
-        for magic_number in magic_numbers:
+        for magic_number in self.magic_numbers:
             for x in range(0, 3):
                 self.sides.append([self.points[magic_number],self.points[magic_number ^ (2 ** x)]])
+
+    def update_faces(self):
+        self.faces = []
+        magics = self.magic_numbers
+        for x in range(len(magics)):
+            magic = magics[0]
+            del magics[0]
+            for remaining_magic in magics:
+                if remaining_magic ^ magic == 6:
+                    self.faces.append([self.points[x] for x in [magic, magic ^ 2, remaining_magic, remaining_magic ^ 2]])
+                else:
+                    self.faces.append([self.points[x] for x in [magic, magic ^ 1, remaining_magic, remaining_magic ^ 1]])
+
+    def return_sides(self):
+        return self.sides
+
+    def return_faces(self):
+        return self.faces
 
     def rotate(self, rotation):
         self.rotation[0] = (self.rotation[0] + rotation[0]) % 360
         self.rotation[1] = (self.rotation[1] + rotation[1]) % 360
         self.rotation[2] = (self.rotation[2] + rotation[2]) % 360
-
-    def return_sides(self):
-        self.update_sides()
-        return self.sides
 
 #########################################################
 

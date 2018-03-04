@@ -14,7 +14,7 @@ screen = pygame.display.set_mode(size)
 screen.fill(WHITE)
 pygame.display.set_caption("Snail Run 3D")
 
-bob = characters.Snail([0,0,0])
+bob = characters.Snail([0,0,0], [0,45,0])
 def draw_bob(woah):
     for cube in bob.return_sides():
         for side in cube:
@@ -35,9 +35,9 @@ def draw_axis(height):
     
     origin = translate.translate(np.array([0,0,0]), screen_position, screen_direction, viewer_distance)
 
-    x_axis = translate.translate(np.array([200,0,0]), screen_position, screen_direction, viewer_distance)
-    y_axis = translate.translate(np.array([0,200,0]), screen_position, screen_direction, viewer_distance)
-    z_axis = translate.translate(np.array([0,0,200]), screen_position, screen_direction, viewer_distance)
+    x_axis = translate.translate(np.array([500,0,0]), screen_position, screen_direction, viewer_distance)
+    y_axis = translate.translate(np.array([0,500,0]), screen_position, screen_direction, viewer_distance)
+    z_axis = translate.translate(np.array([0,0,500]), screen_position, screen_direction, viewer_distance)
 
     #print("x, y, z", x_axis, y_axis, z_axis)
 
@@ -54,7 +54,7 @@ clock = pygame.time.Clock()
 running = True
 while running:
 
-    clock.tick(10)
+    clock.tick(50)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
