@@ -66,6 +66,8 @@ viewer_distance = 1000
 ### main game loop
 running = True
 game_stage = "Title"
+
+show_lines = False
 while running:
 
     clock.tick(10)
@@ -79,6 +81,11 @@ while running:
                 pass
             if event.key == pygame.K_SPACE:
                 game_stage = "Begin"
+            if event.key == pygame.K_0:
+                if show_lines:
+                    show_lines = False
+                else:
+                    show_lines = True
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 pass
@@ -95,7 +102,7 @@ while running:
         screen.blit(start_message, (150, 450))
         screen.blit(glitch_message, (300, 250))
         bob.rotate([0,0,5])
-        draw_character(bob, False)
+        draw_character(bob, show_lines)
         
 
 
