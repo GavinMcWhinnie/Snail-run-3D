@@ -41,6 +41,19 @@ def draw_character(character, with_lines):
                 end =  get_point(side[1])
                 pygame.draw.line(screen, BLACK, start, end, 1)
 
+"""
+def draw_character(character):
+    for cube in character.return_cubes():
+        #iterates through the cubes in a character, sorted with the closest to
+        #the camera first.
+        for face, color in cube.return_faces():
+            #draw that face
+            pass
+        for side, color in cube.return_sides():
+            #draw that edge
+            pass
+"""
+
 pygame.init()
 
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -67,7 +80,7 @@ viewer_distance = 1000
 running = True
 game_stage = "Title"
 
-show_lines = False
+show_lines = True
 while running:
 
     clock.tick(10)
