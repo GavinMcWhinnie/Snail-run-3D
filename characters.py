@@ -10,7 +10,7 @@ YELLOW = (255, 255, 0)
 ORANGE = (255, 153, 0)
 BROWN = (153, 51, 0)
 AQUA = (0, 255, 255)
-LIGHT_GREY = (242, 242, 242)
+LIGHT_GREY = (128, 127, 127)
 
 class Snail():
 
@@ -56,17 +56,18 @@ class Snail():
             
         return cubes_sides
 
-    def return_faces(self, screen_position):
-        cubes_faces = []
+    def return_cubes(self, screen_position):
+        ordered_cubes = []
         cubes_magnitudes = {}
         for current_cube in self.cubes:
+            furthest_point, closest_point = current_cube.return_landmark_points(screen_position)
             cube_to_screen = screen_position - current_cube.origin
             magnitude = np.sqrt(cube_to_screen.dot(cube_to_screen))
-            cubes_magnitudes[magnitude] = current_cube
-        for key in reversed(sorted(cubes_magnitudes)):
-            cubes_faces.append(cubes_magnitudes[key].return_faces(screen_position))
+            cubes_magnitudes[current_cube] = magnitude
+        for cube in sorted(cubes_magnitudes, key=cubes_magnitudes.get, reverse=True):
+            ordered_cubes.append(cube)
 
-        return cubes_faces
+        return ordered_cubes
 
     def update(self):
         self.create_cubes()

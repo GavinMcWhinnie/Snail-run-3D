@@ -29,7 +29,17 @@ def get_point(point):
     point[1] = -point[1] + HEIGHT/2
     return (point[0], point[1])
 
-def draw_character(character, with_lines):
+def draw_character(character):
+    for cube in character.return_cubes(screen_position):
+        for face, color in cube.return_faces(screen_position, darkness):
+            points = [get_point(point) for point in face]
+            pygame.draw.polygon(screen, color, points, 0)
+            
+        for side in cube.return_sides(screen_position):
+            start = get_point(side[0])
+            end = get_point(side[1])
+            pygame.draw.line(screen, BLACK, start, end, 1)
+    """
     for cube, color in character.return_faces(screen_position):
         for face in cube:
             points = [get_point(point) for point in face]
@@ -40,6 +50,7 @@ def draw_character(character, with_lines):
                 start = get_point(side[0])
                 end =  get_point(side[1])
                 pygame.draw.line(screen, BLACK, start, end, 1)
+    """
 
 """
 def draw_character(character):
@@ -75,6 +86,7 @@ glitch_message = small_font.render("(Warning: it's glitchy)", True, BLACK)
 screen_position = np.array([1000,1000,1000])
 screen_direction = np.array([-1,-1,-1])
 viewer_distance = 1000
+darkness = 0
 
 ### main game loop
 running = True
@@ -115,7 +127,7 @@ while running:
         screen.blit(start_message, (150, 450))
         screen.blit(glitch_message, (300, 250))
         bob.rotate([0,0,5])
-        draw_character(bob, show_lines)
+        draw_character(bob)
         
 
 
