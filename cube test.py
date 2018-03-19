@@ -44,7 +44,9 @@ pygame.display.set_caption("Snail Run 3D")
 clock = pygame.time.Clock()
 
 ### create stuff:
-cube1 = cube.Cuboid(200, 400, 350, [0, 0, 0], ORANGE)
+cube1 = cube.Cube(100, [0, 0, 0], AQUA)
+cube2 = cube.Cube(50, [0, 0, 300], ORANGE)
+cube3 = cube.Cuboid(30, 40, 50, [0, -200, -100], RED)
 
 ### set screen/camera position for translate
 screen_position = np.array([1000,1000,1000])
@@ -82,6 +84,10 @@ while running:
     screen.fill((WHITE))
 
     draw_cube(cube1)
+    draw_cube(cube2)
+    draw_cube(cube3)
+    cube3.rotate([-1,-1,-1])
+    cube2.rotate([2,2,2])
     cube1.rotate([1,1,1])
     if _up:
         pass
