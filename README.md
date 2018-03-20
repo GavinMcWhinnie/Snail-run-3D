@@ -15,12 +15,12 @@ Cube has a size attribute, which is the distance from the centre of the cube to 
 Cuboid has three attributes for size: length, breadth and height, which specify the corresponding values of the cuboid.
 
 The vertices on both the cube and cuboid are defined like this:
-  3 ---------- 7
- /|           /|
-1 --------- 5  |
-| |         |  |
-| 2---------|--6
-|/          | /
-0---------- 4
+  3 ---------- 7 \n
+ /|           /| \n
+1 --------- 5  | \n
+| |         |  | \n
+| 2---------|--6 \n
+|/          | /  \n
+0---------- 4    \n
 
 The co-ordinates of each vertice are stored in a list with the number of the vertices being the its index in the list.
