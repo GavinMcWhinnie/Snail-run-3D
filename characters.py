@@ -20,11 +20,12 @@ class Snail():
         if rotation == None:
             rotation = [0, 0, 0]
         self.rotation = np.array(rotation)
+        self.connections = {0:[1,2,5],1:[0,3], 2:[0,4], 3:[1], 4:[2], 5:[0]}
         self.create_cubes()
 
     def create_cubes(self):
         self.cubes = []
-
+        
         head_position = cube.rotate_vector(np.array([0,-100,0]), self.rotation)
         head = cube.Cube(40, self.origin + head_position, GREEN, self.rotation)
         self.cubes.append(head)
@@ -57,17 +58,52 @@ class Snail():
         return cubes_sides
 
     def return_cubes(self, screen_position):
+        furthest_cubes = []
+        furthest_distance = 0
+        for cube in range(len(self.cubes)):
+            furthest_point, closest_point = self.cubes[cube].return_landmark_points(screen_position)
+            point_to_screen = screen_position - self.cubes[cube].points[furthest_point]
+            distance = np.sqrt(point_to_screen.dot(point_to_screen))
+            if distance == furthest_distance:
+                furthest_cubes.append(cube)
+            if distance > furthest_distance:
+                furthest_cubes = [cube]
+                furthest_distance = distance
+
+        current_cubes = furthest_cubes
+        visited = furthest_cubes
+        searching = True
+        ordered_cubes = []
+        while searching:
+            print(current_cubes)
+            available_connections = []
+            #for each cube in current cubes:
+            for cube in range(len(current_cubes)):
+                #for each cube in the connected cubes:
+                for connection in self.connections[cube]:
+                    if connection not in visited:
+                        available_connections.append(connection)
+                        visited.append(connection)
+            if len(available_connections) == 0:
+                searching = False
+                break
+            current_cubes = available_connections
+                
+
+        return self.cubes
+        """
         ordered_cubes = []
         cubes_magnitudes = {}
         for current_cube in self.cubes:
             furthest_point, closest_point = current_cube.return_landmark_points(screen_position)
-            cube_to_screen = screen_position - current_cube.origin
+            cube_to_screen = screen_position - furthest_point
             magnitude = np.sqrt(cube_to_screen.dot(cube_to_screen))
             cubes_magnitudes[current_cube] = magnitude
-        for cube in sorted(cubes_magnitudes, key=cubes_magnitudes.get, reverse=True):
+        for cube in sorted(cubes_magnitudes, key=cubes_magnitudes.get, reverse=False):
             ordered_cubes.append(cube)
 
         return ordered_cubes
+        """
 
     def update(self):
         self.create_cubes()

@@ -101,9 +101,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                pass
+                bob.rotate([0,0,5])
             if event.key == pygame.K_DOWN:
-                pass
+                bob.rotate([0,0,-5])
             if event.key == pygame.K_SPACE:
                 game_stage = "Begin"
             if event.key == pygame.K_0:
@@ -126,7 +126,7 @@ while running:
         screen.blit(logo, (90,70))
         screen.blit(start_message, (150, 450))
         screen.blit(glitch_message, (300, 250))
-        bob.rotate([0,0,5])
+        #bob.rotate([0,0,5])
         draw_character(bob)
         
 
