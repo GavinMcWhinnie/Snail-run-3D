@@ -11,8 +11,8 @@ Cube has a size attribute, which is the distance from the centre of the cube to 
 Cuboid has three attributes for size: length, breadth and height, which specify the corresponding values of the cuboid.
 
 The vertices on both the cube and cuboid are defined like this:
-  3 ---------- 7 <br>
- /|           /| <br>
+&nbsp&nbsp3 ---------- 7 <br>
+&nbsp/|&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp/| <br>
 1 --------- 5  | <br>
 | |         |  | <br>
 | 2---------|--6 <br>
